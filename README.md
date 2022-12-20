@@ -47,7 +47,7 @@ The command listed below can be used to add a proper nametag to the VPC. Adding 
 
 ### Creating Subnets and its name tags
 
-Create the first subnet in your VPC using the CIDR block 172.16.0.0/18.
+Create the first Subnet in your VPC using the CIDR block 172.16.0.0/18.
 
 ```
 #aws ec2 create-subnet --vpc-id vpc-0cea13535c6cc6163 --cidr-block 172.16.0.0/18 --availability-zone ap-south-1a
@@ -98,7 +98,7 @@ aws ec2 create-subnet --vpc-id vpc-0cea13535c6cc6163 --cidr-block 172.16.64.0/18
     }
 }
 ```
-Create a tag for the second subnet
+Create a tag for the second Subnet
 
 ```
 aws ec2 create-tags --resources subnet-05a5654029f8b9d47 --tags Key=Name,Value=Subnet2
@@ -125,18 +125,18 @@ aws ec2 create-subnet --vpc-id vpc-0cea13535c6cc6163 --cidr-block 172.16.128.0/1
     }
 }
 ```
-Create a tag for the private subnet
+Create a tag for the Private Subnet
 
 ```
 aws ec2 create-tags --resources subnet-0a2bc33f670f19968 --tags Key=Name,Value=Subnet3
 ```
-Enable public IP for the subnet1 and subnet2.
+Enable public IP for the Subnet 1 and Subnet 2.
 
 ```
 #aws ec2 modify-subnet-attribute --subnet-id subnet-091c1837f7353fe0e  --map-public-ip-on-launch
 # aws ec2 modify-subnet-attribute --subnet-id subnet-05a5654029f8b9d47  --map-public-ip-on-launch
 ```
-Using the command below, we can view all of the details of the VPC and subnets.
+Using the command below, we can view all of the details of the VPC and Subnets.
 
 ```
 aws ec2 describe-subnets  --filters "Name=vpc-id,Values=vpc-0cea13535c6cc6163"
@@ -261,7 +261,7 @@ aws ec2 create-nat-gateway --subnet-id subnet-05a5654029f8b9d47 --allocation-id 
     "ClientToken": "3ebb1a95-8c0d-4f34-9725-f546dcff1b5a"
 }
 ```
-### Update route tables
+### Update Route Tables
 
 By default, a route table will be created. The command below can be used to access the VPC's default route table information.
 
@@ -405,7 +405,7 @@ aws ec2 describe-route-tables --filters "Name=vpc-id,Values=vpc-0cea13535c6cc616
 }
 ```
 
-### Create security groups
+### Create Security Groups
 
 Let's create a Security group for bastion server. The bastion host acts as a jump server allowing secure connection to instances provisioned without a public IP address. To reduce exposure of servers within the VPC you will create and use a bastion host.
 
@@ -463,7 +463,7 @@ Adding a rule to enable the frontend server to access mysql on the backend serve
 aws ec2 authorize-security-group-ingress --group-id sg-00f88e969b2ddcd23 --protocol tcp --port 3306 --source-group sg-07afb1e28ad90aafa
 ```
 
-### Create a key pair
+### Create a Key Pair
 
 The following commands will create a key pair, save it to a file named aws.pem and update the permission of the file.
 
@@ -485,7 +485,7 @@ aws ec2 describe-vpc-attribute --vpc-id vpc-0cea13535c6cc6163 --attribute enable
 }
 ```
 
-### Launch instances
+### Launch Instances
 
 Launch the bastion server with the necessary security group, keypair, subnet, and AMI using the following command.
 
@@ -1016,5 +1016,6 @@ Run "sudo yum update" to apply all updates.
 [ec2-user@ip-172-16-131-89 ~]$ sudo hostnamectl set-hostname backend.ap-south-1.compute.internal
 ```
 
+## Conclusion
 
-Since we are able to access the servers from the bastion server today’s experiment is a success
+Now we have verified that we are able to access the servers on both public and private subnets from our bastion server which is the key factor to build a live website with website files in frontend server and databases in the backend server.
