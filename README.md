@@ -15,7 +15,7 @@ Following would be a quick summery of the steps that we are going do in this pro
    - Creating an Internet Gateway
    - Creating a NAT Gateway
    - Updating route tables
-   - Creating requires security groups
+   - Creating required security groups
    - Creating keypair
    - Launching instances
    
